@@ -2396,25 +2396,24 @@ def process_eligibility(pan_number, vehicle_data,reg_date=None):
     
      
     return {
-        "eligibility_result": 1,
-        "l-ccepted_banks": accepted_banks,
-        "m-rejected_banks": rejected_banks,
-        "n-display_settlement_loans":display_settlement_var,
-        "k-bounce_summary": bounce_summary,
+        "h-accepted_banks": accepted_banks,
+        "i-rejected_banks": rejected_banks,
+        "c-bounce_summary": bounce_summary,
         "b-pan_number": pan_number,
         "a-name": name,
-        "c-owner_name": owner_name,
-        "d-financer_name": financer_name,
-        "9mother_loan": mother_loan or {},
-        "e-rc_number": rc_number or {},
-        "f-Mother_loan_or_topup_loan":display_active_mother_loan or {},
-        "g-DPDsummary":dpd_summary or {},
-        "i-loans_for_dpd":loan_for_dpd or {},
-        "j-Score Date": score_date or {},
-        "o-rc_data": data_car or {},
-        "p-cibil_data": data or {},
-        "1-credit_score": credit_score,
-        "2-phone number": get_field("data.mobile",data)
+        "d-owner_name": owner_name,
+        "e-financer_name": financer_name,
+        "j-mother_loan": mother_loan or {},
+        "k-rc_number": rc_number or {},
+        "l-Mother_loan_or_topup_loan":display_active_mother_loan or {},
+        "m-DPDsummary":dpd_summary or {},
+        "f-loans_for_dpd":loan_for_dpd or {},
+        "g-display_settlement_loans":display_settlement_var,
+        "o-Score Date": score_date or {},
+        "p-rc_data": data_car or {},
+        "q-cibil_data": data or {},
+        "aa-credit_score": credit_score,
+        "aaa-phone number": get_field("data.mobile",data)
     }
 
 
