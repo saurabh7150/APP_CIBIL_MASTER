@@ -1378,7 +1378,7 @@ def loan_dpd_helper(data):
     end_date = today
     allowed_loans = [
         "auto loan (personal)","auto loan", "two wheeler loan", "personal loan", "business loan","business loan – general","business loan – priority sector – small business","business loan – priority sector – agriculture","business loan – priority sector – others","business loan - unsecured"
-        "housing loan", "property loan", "commercial vehicle loan","microfinance – business Loan","microfinance – personal loan","microfinance – housing loan","business loan - secured","Used Car Loan"
+        "housing loan", "property loan", "commercial vehicle loan","microfinance – business Loan","microfinance – personal loan","microfinance – housing loan","business loan - secured","used car loan"
     ]
     matched_accounts = []
     for account in data.get("data", {}).get("credit_report", [])[0].get("accounts", []):
@@ -1461,7 +1461,7 @@ def count_bounces_by_period(data, current_date=None, exclude_account_number=None
     }
     allowed_loans = [
         "auto loan (personal)","auto loan", "two wheeler loan", "personal loan", "business loan","business loan – general","business loan – priority sector – small business","business loan – priority sector – agriculture","business loan – priority sector – others","business loan - unsecured"
-        "housing loan", "property loan", "commercial vehicle loan","microfinance – business Loan","microfinance – personal loan","microfinance – housing loan","business loan - secured","Used Car Loan"
+        "housing loan", "property loan", "commercial vehicle loan","microfinance – business Loan","microfinance – personal loan","microfinance – housing loan","business loan - secured","used car loan"
     ]
     for account in data.get("data", {}).get("credit_report", [])[0].get("accounts", []):
         account_type = account.get("accountType", "").lower()
