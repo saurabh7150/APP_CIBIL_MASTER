@@ -1316,7 +1316,7 @@ def count_custom_dpd_buckets(data):
     }
     allowed_loans = [
         "auto loan (personal)","auto loan", "two wheeler loan", "personal loan", "business loan","business loan – general","business loan – priority sector – small business","business loan – priority sector – agriculture","business loan – priority sector – others","business loan - unsecured"
-        "housing loan", "property loan", "commercial vehicle loan","microfinance – business Loan","microfinance – personal loan","microfinance – housing loan","business loan - secured","Used Car Loan"
+        "housing loan", "property loan", "commercial vehicle loan","microfinance – business Loan","microfinance – personal loan","microfinance – housing loan","business loan - secured","used car loan",
     ]
 
     for account in data.get("data", {}).get("credit_report", [])[0].get("accounts", []):
@@ -1327,14 +1327,14 @@ def count_custom_dpd_buckets(data):
         if ownership_indicator in ["3", "4", "guarantor", "authorized user"]:
             continue
         
-        
+
         # Consider only loan-type accounts (adjust as needed)
         # Consider only loan-type accounts (adjust as needed)
         # ✅ Skip if account_type is not one of the allowed loans
         if not any(allowed in account_type for allowed in allowed_loans):
             continue
 
-        
+        print("accounts printing after filter of allowed loan",account_type)
         for record in account.get("monthlyPayStatus", []):
             date_str = record.get("date")
             status_str = record.get("status")
@@ -1984,7 +1984,10 @@ def analyze():
         account_type = account.get("accountType", "").lower()
         if any(keyword in account_type for keyword in keywords):
             monthly_status = account.get("monthlyPayStatus", [])
-            
+            ownership_indicator = str(account.get("ownershipIndicator", "")).strip().lower()
+            # 🚫 Skip if numeric 3/4 or text form 'guarantor'/'authorized user'
+            if ownership_indicator in ["3", "4", "guarantor", "authorized user"]:
+                continue
             # Check latest funding condition (less than 3 months of data)
             if len(monthly_status) <= 3:
                 # Parse dateOpened
@@ -2245,7 +2248,10 @@ def process_eligibility(pan_number, vehicle_data,reg_date=None):
         account_type = account.get("accountType", "").lower()
         if any(keyword in account_type for keyword in keywords):
             monthly_status = account.get("monthlyPayStatus", [])
-            
+            ownership_indicator = str(account.get("ownershipIndicator", "")).strip().lower()
+            # 🚫 Skip if numeric 3/4 or text form 'guarantor'/'authorized user'
+            if ownership_indicator in ["3", "4", "guarantor", "authorized user"]:
+                continue
             # Check latest funding condition (less than 3 months of data)
             if len(monthly_status) <= 3:
                 # Parse dateOpened
@@ -2399,21 +2405,22 @@ def process_eligibility(pan_number, vehicle_data,reg_date=None):
         "h-accepted_banks": accepted_banks,
         "i-rejected_banks": rejected_banks,
         "c-bounce_summary": bounce_summary,
-        "b-pan_number": pan_number,
-        "a-name": name,
+        "k-pan_number": pan_number,
+        "e-name": name,
         "d-owner_name": owner_name,
-        "e-financer_name": financer_name,
+        "a-financer_name": financer_name,
         "j-mother_loan": mother_loan or {},
-        "k-rc_number": rc_number or {},
+        "b-rc_number": rc_number or {},
         "l-Mother_loan_or_topup_loan":display_active_mother_loan or {},
         "m-DPDsummary":dpd_summary or {},
         "f-loans_for_dpd":loan_for_dpd or {},
         "g-display_settlement_loans":display_settlement_var,
         "o-Score Date": score_date or {},
-        "p-rc_data": data_car or {},
-        "q-cibil_data": data or {},
+        "q-rc_data": data_car or {},
+        "p-cibil_data": data or {},
         "aa-credit_score": credit_score,
         "aaa-phone number": get_field("data.mobile",data)
+
     }
 
 
