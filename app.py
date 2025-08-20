@@ -2405,7 +2405,7 @@ def process_eligibility(pan_number, vehicle_data,reg_date=None):
         "h-accepted_banks": accepted_banks,
         "i-rejected_banks": rejected_banks,
         "c-bounce_summary": bounce_summary,
-        "k-pan_number": pan_number,
+        "aaa-pan_number": pan_number,
         "e-name": name,
         "d-owner_name": owner_name,
         "a-financer_name": financer_name,
@@ -2419,7 +2419,7 @@ def process_eligibility(pan_number, vehicle_data,reg_date=None):
         "q-rc_data": data_car or {},
         "p-cibil_data": data or {},
         "aa-credit_score": credit_score,
-        "aaa-phone number": get_field("data.mobile",data)
+        "k-phone number": get_field("data.mobile",data)
 
     }
 
