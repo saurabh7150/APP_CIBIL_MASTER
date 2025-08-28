@@ -228,7 +228,7 @@ BANK_RULES = {
             (0, 100000, "PASS"), (100001, 500000, "PASS"), (500001, float('inf'), "PASS")
         ],
         "bounces_0_3_months": [
-            (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, float('inf'), "REJECT")
+            (0, 0, "PASS"), (1, 1, "REJECT"), (2, 2, "REJECT"), (3, float('inf'), "REJECT")
         ],
         "bounces_0_6_months": [
             (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, 3, "PASS"), (4, float('inf'), "REJECT")
@@ -314,7 +314,7 @@ BANK_RULES = {
             (0, 100000, "PASS"), (100001, 500000, "REJECT"), (500001, float('inf'), "REJECT")
         ],
         "bounces_0_3_months": [
-            (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "REJECT"), (3, float('inf'), "REJECT")
+            (0, 0, "PASS"), (1, 1, "REJECT"), (2, 2, "REJECT"), (3, float('inf'), "REJECT")
         ],
         "bounces_0_6_months": [
             (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, 3, "REJECT"), (4, float('inf'), "REJECT")
@@ -826,7 +826,7 @@ BANK_RULES = {
             (0, 100000, "PASS"), (100001, 500000, "PASS"), (500001, float('inf'), "REJECT")
         ],
         "bounces_0_3_months": [
-            (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, float('inf'), "REJECT")
+            (0, 0, "PASS"), (1, 1, "REJECT"), (2, 2, "REJECT"), (3, float('inf'), "REJECT")
         ],
         "bounces_0_6_months": [
             (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, 3, "PASS"), (4, float('inf'), "REJECT")
@@ -911,7 +911,7 @@ BANK_RULES = {
             (0, 100000, "PASS"), (100001, 500000, "PASS"), (500001, float('inf'), "REJECT")
         ],
         "bounces_0_3_months": [
-            (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, float('inf'), "REJECT")
+            (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, float('inf'), "PASS")
         ],
         "bounces_0_6_months": [
             (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, 3, "PASS"), (4, float('inf'), "REJECT")
@@ -996,7 +996,7 @@ BANK_RULES = {
             (0, 100000, "PASS"), (100001, 500000, "REJECT"), (500001, float('inf'), "REJECT")
         ],
         "bounces_0_3_months": [
-            (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, float('inf'), "REJECT")
+            (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, float('inf'), "PASS")
         ],
         "bounces_0_6_months": [
             (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, 3, "PASS"), (4, float('inf'), "REJECT")
@@ -2405,7 +2405,7 @@ def process_eligibility(pan_number, vehicle_data,reg_date=None):
         "h-accepted_banks": accepted_banks,
         "i-rejected_banks": rejected_banks,
         "c-bounce_summary": bounce_summary,
-        "aaa-pan_number": pan_number,
+        "k-pan_number": pan_number,
         "e-name": name,
         "d-owner_name": owner_name,
         "a-financer_name": financer_name,
@@ -2419,7 +2419,7 @@ def process_eligibility(pan_number, vehicle_data,reg_date=None):
         "q-rc_data": data_car or {},
         "p-cibil_data": data or {},
         "aa-credit_score": credit_score,
-        "k-phone number": get_field("data.mobile",data)
+        "aaa-phone number": get_field("data.mobile",data)
 
     }
 
