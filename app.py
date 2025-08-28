@@ -228,7 +228,7 @@ BANK_RULES = {
             (0, 100000, "PASS"), (100001, 500000, "PASS"), (500001, float('inf'), "PASS")
         ],
         "bounces_0_3_months": [
-            (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, float('inf'), "REJECT")
+            (0, 0, "PASS"), (1, 1, "REJECT"), (2, 2, "REJECT"), (3, float('inf'), "REJECT")
         ],
         "bounces_0_6_months": [
             (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, 3, "PASS"), (4, float('inf'), "REJECT")
@@ -314,7 +314,7 @@ BANK_RULES = {
             (0, 100000, "PASS"), (100001, 500000, "REJECT"), (500001, float('inf'), "REJECT")
         ],
         "bounces_0_3_months": [
-            (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "REJECT"), (3, float('inf'), "REJECT")
+            (0, 0, "PASS"), (1, 1, "REJECT"), (2, 2, "REJECT"), (3, float('inf'), "REJECT")
         ],
         "bounces_0_6_months": [
             (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, 3, "REJECT"), (4, float('inf'), "REJECT")
@@ -826,7 +826,7 @@ BANK_RULES = {
             (0, 100000, "PASS"), (100001, 500000, "PASS"), (500001, float('inf'), "REJECT")
         ],
         "bounces_0_3_months": [
-            (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, float('inf'), "REJECT")
+            (0, 0, "PASS"), (1, 1, "REJECT"), (2, 2, "REJECT"), (3, float('inf'), "REJECT")
         ],
         "bounces_0_6_months": [
             (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, 3, "PASS"), (4, float('inf'), "REJECT")
@@ -911,7 +911,7 @@ BANK_RULES = {
             (0, 100000, "PASS"), (100001, 500000, "PASS"), (500001, float('inf'), "REJECT")
         ],
         "bounces_0_3_months": [
-            (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, float('inf'), "REJECT")
+            (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, float('inf'), "PASS")
         ],
         "bounces_0_6_months": [
             (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, 3, "PASS"), (4, float('inf'), "REJECT")
@@ -996,7 +996,7 @@ BANK_RULES = {
             (0, 100000, "PASS"), (100001, 500000, "REJECT"), (500001, float('inf'), "REJECT")
         ],
         "bounces_0_3_months": [
-            (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, float('inf'), "REJECT")
+            (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, float('inf'), "PASS")
         ],
         "bounces_0_6_months": [
             (0, 0, "PASS"), (1, 1, "PASS"), (2, 2, "PASS"), (3, 3, "PASS"), (4, float('inf'), "REJECT")
@@ -1316,7 +1316,7 @@ def count_custom_dpd_buckets(data):
     }
     allowed_loans = [
         "auto loan (personal)","auto loan", "two wheeler loan", "personal loan", "business loan","business loan – general","business loan – priority sector – small business","business loan – priority sector – agriculture","business loan – priority sector – others","business loan - unsecured"
-        "housing loan", "property loan", "commercial vehicle loan","microfinance – business Loan","microfinance – personal loan","microfinance – housing loan","business loan - secured"
+        "housing loan", "property loan", "commercial vehicle loan","microfinance – business Loan","microfinance – personal loan","microfinance – housing loan","business loan - secured","used car loan",
     ]
 
     for account in data.get("data", {}).get("credit_report", [])[0].get("accounts", []):
@@ -1327,14 +1327,14 @@ def count_custom_dpd_buckets(data):
         if ownership_indicator in ["3", "4", "guarantor", "authorized user"]:
             continue
         
-        
+
         # Consider only loan-type accounts (adjust as needed)
         # Consider only loan-type accounts (adjust as needed)
         # ✅ Skip if account_type is not one of the allowed loans
         if not any(allowed in account_type for allowed in allowed_loans):
             continue
 
-        
+        print("accounts printing after filter of allowed loan",account_type)
         for record in account.get("monthlyPayStatus", []):
             date_str = record.get("date")
             status_str = record.get("status")
@@ -1378,7 +1378,7 @@ def loan_dpd_helper(data):
     end_date = today
     allowed_loans = [
         "auto loan (personal)","auto loan", "two wheeler loan", "personal loan", "business loan","business loan – general","business loan – priority sector – small business","business loan – priority sector – agriculture","business loan – priority sector – others","business loan - unsecured"
-        "housing loan", "property loan", "commercial vehicle loan","microfinance – business Loan","microfinance – personal loan","microfinance – housing loan","business loan - secured"
+        "housing loan", "property loan", "commercial vehicle loan","microfinance – business Loan","microfinance – personal loan","microfinance – housing loan","business loan - secured","used car loan"
     ]
     matched_accounts = []
     for account in data.get("data", {}).get("credit_report", [])[0].get("accounts", []):
@@ -1461,7 +1461,7 @@ def count_bounces_by_period(data, current_date=None, exclude_account_number=None
     }
     allowed_loans = [
         "auto loan (personal)","auto loan", "two wheeler loan", "personal loan", "business loan","business loan – general","business loan – priority sector – small business","business loan – priority sector – agriculture","business loan – priority sector – others","business loan - unsecured"
-        "housing loan", "property loan", "commercial vehicle loan","microfinance – business Loan","microfinance – personal loan","microfinance – housing loan","business loan - secured"
+        "housing loan", "property loan", "commercial vehicle loan","microfinance – business Loan","microfinance – personal loan","microfinance – housing loan","business loan - secured","used car loan"
     ]
     for account in data.get("data", {}).get("credit_report", [])[0].get("accounts", []):
         account_type = account.get("accountType", "").lower()
@@ -1850,6 +1850,35 @@ def count_settlements_by_age(data):
 
     return recent_settlements, old_settlements
 
+def display_settlement(data):
+    recent_cutoff = datetime.today() - relativedelta(months=24)
+    accounts = data.get("data", {}).get("credit_report", [])[0].get("accounts", [])
+    matched_accounts=[]
+    for account in accounts:
+        account_type = account.get("accountType", "").lower()
+        ownership_indicator = str(account.get("ownershipIndicator", "")).strip().lower()
+
+        # 🚫 Skip if numeric 3/4 or text form 'guarantor'/'authorized user'
+        if ownership_indicator in ["3", "4", "guarantor", "authorized user"]:
+            continue
+        if "credit card" in account_type:
+            continue  # 🚫 Skip credit card accounts
+        try:
+            wo_amount_total = float(account.get("woAmountTotal", -1))
+            if wo_amount_total > 50000:
+                date_reported_str = account.get("dateReported", "")
+                if date_reported_str and date_reported_str.lower() != "na":
+                    matched_accounts.append({
+            "accountNumber": account.get("accountNumber", ""),
+            "accountType": account.get("accountType", ""),
+            "ownershipIndicator": account.get("ownershipIndicator",""),
+            "woAmountTotal": account.get("woAmountTotal",-1),
+            "dateReported": account.get("dateReported",-1)
+            })
+        except (TypeError, ValueError):
+            continue
+    return matched_accounts
+
 
 
 @app.route('/analyze')
@@ -1955,7 +1984,10 @@ def analyze():
         account_type = account.get("accountType", "").lower()
         if any(keyword in account_type for keyword in keywords):
             monthly_status = account.get("monthlyPayStatus", [])
-            
+            ownership_indicator = str(account.get("ownershipIndicator", "")).strip().lower()
+            # 🚫 Skip if numeric 3/4 or text form 'guarantor'/'authorized user'
+            if ownership_indicator in ["3", "4", "guarantor", "authorized user"]:
+                continue
             # Check latest funding condition (less than 3 months of data)
             if len(monthly_status) <= 3:
                 # Parse dateOpened
@@ -2216,7 +2248,10 @@ def process_eligibility(pan_number, vehicle_data,reg_date=None):
         account_type = account.get("accountType", "").lower()
         if any(keyword in account_type for keyword in keywords):
             monthly_status = account.get("monthlyPayStatus", [])
-            
+            ownership_indicator = str(account.get("ownershipIndicator", "")).strip().lower()
+            # 🚫 Skip if numeric 3/4 or text form 'guarantor'/'authorized user'
+            if ownership_indicator in ["3", "4", "guarantor", "authorized user"]:
+                continue
             # Check latest funding condition (less than 3 months of data)
             if len(monthly_status) <= 3:
                 # Parse dateOpened
@@ -2276,6 +2311,7 @@ def process_eligibility(pan_number, vehicle_data,reg_date=None):
     print("dpd 1 and above",dpd_1_above)
     print("dpd 31-45",dpd_31_44_count)
     print("dpd 45 and above",dpd_45_above)
+    display_settlement_var = display_settlement(data)
     
      #calculation of mother auto loan
     recent_settlements, old_settlements = count_settlements_by_age(data)
@@ -2366,23 +2402,25 @@ def process_eligibility(pan_number, vehicle_data,reg_date=None):
     
      
     return {
-        "eligibility_result": 1,
-        "7accepted_banks": accepted_banks,
-        "8rejected_banks": rejected_banks,
-        "3bounce_summary": bounce_summary,
-        "2pan_number": pan_number,
-        "1name": name,
-        "4owner_name": owner_name,
-        "5financer_name": financer_name,
-        "9mother_loan": mother_loan or {},
-        "10rc_number": rc_number or {},
-        "11-Mother_loan_or_topup_loan":display_active_mother_loan or {},
-        "12DPDsummary":dpd_summary or {},
-        "6loans_for_dpd":loan_for_dpd or {},
-        "Score Date": score_date or {},
-        "rc_data": data_car or {},
-        "cibil_data": data or {},
-        "3credit_score": credit_score
+        "h-accepted_banks": accepted_banks,
+        "i-rejected_banks": rejected_banks,
+        "c-bounce_summary": bounce_summary,
+        "k-pan_number": pan_number,
+        "e-name": name,
+        "d-owner_name": owner_name,
+        "a-financer_name": financer_name,
+        "j-mother_loan": mother_loan or {},
+        "b-rc_number": rc_number or {},
+        "l-Mother_loan_or_topup_loan":display_active_mother_loan or {},
+        "m-DPDsummary":dpd_summary or {},
+        "f-loans_for_dpd":loan_for_dpd or {},
+        "g-display_settlement_loans":display_settlement_var,
+        "o-Score Date": score_date or {},
+        "q-rc_data": data_car or {},
+        "p-cibil_data": data or {},
+        "aa-credit_score": credit_score,
+        "aaa-phone number": get_field("data.mobile",data)
+
     }
 
 
