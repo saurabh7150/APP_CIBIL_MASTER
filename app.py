@@ -5,7 +5,7 @@ import json
 from datetime import datetime , timedelta
 from dateutil.relativedelta import relativedelta
 from typing import List, Dict, Tuple
-#from function import get_value_phase2
+from function import get_value_phase2
 
 BANK_RULES = {
     "HERO": {
@@ -2813,21 +2813,49 @@ def analyze_api():
         return jsonify({"error": str(e)}), 500
 
 
-'''
+
 @app.route('/api/get_phase2', methods=['POST'])
 def get_phase2():
     payload = request.json
     pan_number = payload.get('pan_number')
     vehicle_number = payload.get('vehicle_number')
+    account_number = payload.get('account_number')
+    abb_hero = payload.get('abb_hero')
+    abb_idfc = payload.get('abb_idfc')
+    abb_piramal = payload.get('abb_piramal')
+    abb_axis = payload.get('abb_axis')
+    abb_au = payload.get('abb_au')
+    abb_chola = payload.get('abb_chola')
+    abb_tata = payload.get('abb_tata')
+    abb_bajaj = payload.get('abb_bajaj')
+    abb_yes_bank = payload.get('abb_yes_bank')
+    abb_poonawala = payload.get('abb_poonawala')
+    abb_hdfc = payload.get('abb_hdfc')
 
     if not pan_number or not vehicle_number:
         return jsonify({"error": "Missing PAN or Vehicle Number"}), 400
 
     try:
-        result = get_value_phase2(pan_number, vehicle_number)
+        # 🔹 Pass all values into your processing function
+        result = get_value_phase2(
+            pan_number,
+            vehicle_number,
+            account_number,
+            abb_hero,
+            abb_idfc,
+            abb_piramal,
+            abb_axis,
+            abb_au,
+            abb_chola,
+            abb_tata,
+            abb_bajaj,
+            abb_yes_bank,
+            abb_poonawala,
+            abb_hdfc
+        )
         return jsonify(result), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-'''
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
