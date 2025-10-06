@@ -1794,7 +1794,7 @@ def get_value_phase2(pan_number,
 
 
 
-    
+    all_results = {}  # store results for every bank
     ABB = 0
     for bank in banks:
         print(f"\n====================== {bank.upper()} ======================")
@@ -1856,8 +1856,26 @@ def get_value_phase2(pan_number,
 
         la5_scores = la5_lowest_helper(la1_multiplier, la2_scores, la3_scores, la4_scores, bank=bank)
         print("LA5:", la5_scores)
-    # Combine and return data
+        all_results[bank.lower()] = {
+        "ABB": ABB,
+        "multipliers": getmultiplier,
+        "inhand_capping": inhand_capping,
+        "bounces": res,
+        "amount_overdue": amount_overdue,
+        "valuation": valuation,
+        "LA1": la1_multiplier,
+        "LA2": la2_scores,
+        "LA3": la3_scores,
+        "LA4": la4_scores,
+        "LA5": la5_scores
+        }
+
+# Final API response
     return {
-        "cibil_data": cibil_data,
-        "vehicle_data": data_car
+    "pan_number": pan_number,
+    "vehicle_number": vehicle_number,
+    "account_number": account_number,
+    "results": all_results,
+   
     }
+    
