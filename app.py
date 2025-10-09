@@ -2400,7 +2400,7 @@ def process_eligibility(pan_number, vehicle_data,reg_date=None):
     
     eligibility_result =1        
     
-     
+    return{"mem leak : Data limit exceeded"}
     return {
         "h-accepted_banks": accepted_banks,
         "i-rejected_banks": rejected_banks,
