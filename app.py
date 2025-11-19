@@ -99,7 +99,7 @@ BANK_RULES = {
             (720, 724, "PASS"), (725, 749, "PASS"), (750, float('inf'), "PASS")
         ],
         "cibil_enquiry_count": [
-            (0, 0, "PASS"), (1, 5, "PASS"), (6, 10, "REJECT"), (11, float('inf'), "REJECT")
+            (0, 0, "PASS"), (1, 5, "PASS"), (6, 10, "PASS"), (11, float('inf'), "REJECT")
         ],
         "dpd_1_30": [
             (0, 0, "PASS"), (1, 6, "PASS"), (6, 10, "REJECT"), (11, float('inf'), "REJECT")
@@ -528,7 +528,7 @@ BANK_RULES = {
             (720, 724, "PASS"), (725, 749, "PASS"), (750, float('inf'), "PASS")
         ],
        "cibil_enquiry_count": [
-            (0, 0, "PASS"), (1, 5, "PASS"),(6,7,'PASS'), (6, 10, "PASS"), (11, float('inf'), "PASS")
+            (0, 0, "PASS"), (1, 5, "PASS"),(6,7,'PASS'), (8, 14, "PASS"), (15, float('inf'), "REJECT")
         ],
         "dpd_1_30": [
             (0, 0, "PASS"), (1, 5, "PASS"), (6, 10, "REJECT"), (11, float('inf'), "REJECT")
@@ -868,7 +868,7 @@ BANK_RULES = {
             (720, 724, "PASS"), (725, 749, "PASS"), (750, float('inf'), "PASS")
         ],
        "cibil_enquiry_count": [
-            (0, 0, "PASS"), (1, 5, "PASS"),(6,7,'PASS'), (6, 10, "PASS"), (11, float('inf'), "PASS")
+            (0, 0, "PASS"), (1, 5, "PASS"),(6,7,'PASS'), (6, 14, "PASS"), (15, float('inf'), "REJECT")
         ],
         "dpd_1_30": [
             (0, 0, "PASS"), (1, 5, "PASS"), (6, 9, "PASS"), (10, float('inf'), "REJECT")
@@ -953,7 +953,7 @@ BANK_RULES = {
             (720, 724, "PASS"), (725, 749, "PASS"), (750, float('inf'), "PASS")
         ],
        "cibil_enquiry_count": [
-            (0, 0, "PASS"), (1, 6, "PASS"),(7,7,'PASS'), (8, 10, "REJECT"), (11, float('inf'), "REJECT")
+            (0, 0, "PASS"), (1, 6, "PASS"),(7,7,'PASS'), (8, 10, "PASS"), (11, float('inf'), "REJECT")
         ],
         "dpd_1_30": [
             (0, 0, "PASS"), (1, 5, "PASS"), (6, 10, "PASS"), (11, float('inf'), "PASS")
@@ -2400,7 +2400,7 @@ def process_eligibility(pan_number, vehicle_data,reg_date=None):
     
     eligibility_result =1        
     
-    
+     
     return {
         "h-accepted_banks": accepted_banks,
         "i-rejected_banks": rejected_banks,
