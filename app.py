@@ -1315,7 +1315,7 @@ def count_custom_dpd_buckets(data):
         "dpd_45_above": 0,
     }
     allowed_loans = [
-        "auto loan (personal)","auto loan", "two wheeler loan", "personal loan", "business loan","business loan – general","business loan – priority sector – small business","business loan – priority sector – agriculture","business loan – priority sector – others","business loan - unsecured"
+        "auto loan (personal)","auto loan", "two wheeler loan", "personal loan", "business loan","business loan – general","business loan – priority sector – small business","business loan – priority sector – agriculture","business loan – priority sector – others","business loan - unsecured",
         "housing loan", "property loan", "commercial vehicle loan","microfinance – business Loan","microfinance – personal loan","microfinance – housing loan","business loan - secured","used car loan",
     ]
 
