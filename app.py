@@ -1554,8 +1554,10 @@ def financer_match(financer1, financer2):
 
 
 def find_mother_auto_loan(data, data_car):
-    registration_date_str = data_car["data"]["data"].get("registration_date")
-    financer_name_from_rc = data_car["data"]["data"].get("financer", "")
+    car_info = data_car.get("car_data", {})
+
+    registration_date_str = car_info.get("registration_date")
+    financer_name_from_rc = car_info.get("financer", "")
 
     if not registration_date_str or not financer_name_from_rc:
         return None
@@ -1938,7 +1940,7 @@ def analyze():
     
 
     # Get the registration date from the data
-    registration_date_str = data_car["data"]["data"]["registration_date"]
+    registration_date_str = data_car.get("car_data", {}).get("registration_date")
     registration_date = datetime.strptime(registration_date_str, "%Y-%m-%d")
     current_date = datetime.today()
     year_diff = current_date.year - registration_date.year
@@ -2202,7 +2204,7 @@ def process_eligibility(pan_number, vehicle_data,reg_date=None):
     
     
     # Get the registration date from the data
-    registration_date_str = data_car["data"]["data"]["registration_date"]
+    registration_date_str = data_car.get("car_data", {}).get("registration_date")
     registration_date = datetime.strptime(registration_date_str, "%Y-%m-%d")
     current_date = datetime.today()
     year_diff = current_date.year - registration_date.year
